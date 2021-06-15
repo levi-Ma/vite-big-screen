@@ -37,9 +37,7 @@
           <div class="chart-title flex">
             <p class="title text-white">快递公司快件占比综合监测</p>
           </div>
-          <div class="pt-2">
-            <!-- <AreaChart v-bind="config" /> -->
-          </div>
+          <div class="pt-2"></div>
           <div class="chart-line"></div>
         </div>
 
@@ -48,10 +46,8 @@
           <div class="chart-title flex">
             <p class="title text-white">驿站到达率问题率比例</p>
           </div>
-          <div class="pt-2">
-            <button @click="handleConfigChangeClick">change config</button>
-            <button @click="handleDataChangeClick">change data</button>
-            <LineChart v-bind="config" />
+          <div class="pt-3">
+            <div id="container"></div>
           </div>
           <div class="chart-line"></div>
         </div>
@@ -160,77 +156,80 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, reactive, watch } from "vue";
-import { AreaChart, LineChart } from "@opd/g2plot-vue";
-import { Plot, LineOptions } from "@antv/g2plot";
-
+import { defineComponent, Ref, ref, onMounted } from "vue";
+import { Line, Datum } from "@antv/g2plot";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
 
 export default defineComponent({
   name: "index",
-  components: {
-    AreaChart,
-    LineChart,
-  },
+  components: {},
   setup: () => {
     const currentTime = ref("");
-    const chartRef = ref<Ref<Plot<LineOptions>> | null>(null);
-
-    const config = reactive({
-      height: 200,
-      autoFit: true,
-      xField: "year",
-      yField: "value",
-      smooth: true,
-      meta: {
-        value: {
-          max: 15,
-        },
+    const data = [
+      {
+        x: "2019-01",
+        y: 308,
       },
-      data: [
-        { year: "1991", value: 3 },
-        { year: "1992", value: 4 },
-        { year: "1993", value: 3.5 },
-        { year: "1994", value: 5 },
-        { year: "1995", value: 4.9 },
-        { year: "1996", value: 6 },
-        { year: "1997", value: 7 },
-        { year: "1998", value: 9 },
-        { year: "1999", value: 0 },
-      ],
+      {
+        x: "2019-02",
+        y: 371,
+      },
+      {
+        x: "2019-03",
+        y: 685,
+      },
+      {
+        x: "2019-04",
+        y: 257,
+      },
+      {
+        x: "2019-05",
+        y: 1500,
+      },
+      {
+        x: "2019-06",
+        y: 888,
+      },
+    ];
+
+    const config: any = {
+      title: {
+        text: "单折线图",
+      },
+      description: {
+        text: "一个简单的单折线图",
+      },
+      legend: {
+        flipPage: false,
+      },
+      label: {
+        visible: true,
+      },
+      smooth: true,
+      lineSize: 1,
+      forceFit: false,
+      width: 453,
+      height: 220,
+      xField: "x",
+      yField: "y",
+      color: "#ffffff",
+    };
+
+    onMounted(() => {
+      const line = new Line("container", {
+        data,
+        ...config,
+      });
+      line.render();
     });
 
     setInterval(() => {
       currentTime.value = getCurrentTime();
     }, 1000);
 
-    const handleConfigChangeClick = () => {
-      config.smooth = !config.smooth;
-      console.log(chartRef.value);
-    };
-
-    const handleDataChangeClick = () => {
-      const { data } = config;
-      data.push({
-        year: (+data[data.length - 1].year + 1).toString(),
-        value: 10 + +(Math.random() * 10).toFixed(0),
-      });
-      config.data = [...data];
-    };
-
-    watch(chartRef, () => {
-      chartRef.value?.on("click", (e: any) => {
-        console.log(e);
-      });
-    });
-
     return {
       currentTime,
-      config,
-      chartRef,
-      handleConfigChangeClick,
-      handleDataChangeClick,
     };
   },
 });

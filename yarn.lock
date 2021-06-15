@@ -248,14 +248,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@opd/g2plot-vue@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.nlark.com/@opd/g2plot-vue/download/@opd/g2plot-vue-3.2.1.tgz#b161e5811926dd59ed34391fd143be7033bbf3ef"
-  integrity sha1-sWHlgRkm3VntNDkf0UO+cDO78+8=
-  dependencies:
-    core-js "^3.12.1"
-    vue-demi "^0.9.0"
-
 "@tailwindcss/postcss7-compat@^2.1.4", "tailwindcss@npm:@tailwindcss/postcss7-compat":
   version "2.1.4"
   resolved "https://registry.nlark.com/@tailwindcss/postcss7-compat/download/@tailwindcss/postcss7-compat-2.1.4.tgz#427a2fd1837a3d9a54a296cc8b86a3f76b1452a7"
@@ -639,11 +631,6 @@ consolidate@^0.16.0:
   integrity sha1-oRhkdokw8vGUMWYKZZBmaPX73BY=
   dependencies:
     bluebird "^3.7.2"
-
-core-js@^3.12.1:
-  version "3.14.0"
-  resolved "https://registry.nlark.com/core-js/download/core-js-3.14.0.tgz#62322b98c71cc2018b027971a69419e2425c2a6c"
-  integrity sha1-YjIrmMccwgGLAnlxppQZ4kJcKmw=
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -1536,11 +1523,6 @@ vite@^2.3.7:
     rollup "^2.38.5"
   optionalDependencies:
     fsevents "~2.3.1"
-
-vue-demi@^0.9.0:
-  version "0.9.1"
-  resolved "https://registry.nlark.com/vue-demi/download/vue-demi-0.9.1.tgz?cache=0&sync_timestamp=1622102566488&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-demi%2Fdownload%2Fvue-demi-0.9.1.tgz#25d6e1ebd4d4010757ff3571e2bf6a1d7bf3de82"
-  integrity sha1-Jdbh69TUAQdX/zVx4r9qHXvz3oI=
 
 vue-router@4:
   version "4.0.8"
