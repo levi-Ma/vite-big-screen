@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <!-- 右侧数据 -->
+      <!-- 右侧数据 😉 -->
       <div class="chart-side">
         <!-- 服务监控 -->
         <div class="chart-item height-4">
@@ -161,8 +161,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-import { NButton } from "naive-ui";
 
+import { NButton } from "naive-ui";
 import LineChart from "@/components/charts/line-chart.vue";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
