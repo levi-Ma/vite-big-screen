@@ -38,7 +38,11 @@
             <p class="title text-white">快递公司快件占比综合监测</p>
           </div>
           <div class="pt-2">
-            <n-button type="primary">add data</n-button>
+            <LineChart
+              baseId="map1"
+              :data="lineData.data"
+              :config="lineData.config"
+            />
           </div>
           <div class="chart-line"></div>
         </div>
@@ -48,9 +52,7 @@
           <div class="chart-title flex">
             <p class="title text-white">驿站到达率问题率比例</p>
           </div>
-          <div class="pt-3">
-            <div id="container"></div>
-          </div>
+          <div class="pt-3"></div>
           <div class="chart-line"></div>
         </div>
       </div>
@@ -158,93 +160,92 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, reactive } from "vue";
-import { Line, Datum } from "@antv/g2plot";
+import { defineComponent, ref, reactive } from "vue";
 import { NButton } from "naive-ui";
+
+import LineChart from "@/components/charts/line-chart.vue";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
 
 export default defineComponent({
   name: "index",
   components: {
+    LineChart,
     NButton,
   },
   setup: () => {
     const currentTime = ref("");
-    const data: any = [
-      { year: "1991", value: 3 },
-      { year: "1992", value: 4 },
-      { year: "1993", value: 3.5 },
-      { year: "1994", value: 5 },
-      { year: "1995", value: 4.9 },
-      { year: "1996", value: 6 },
-      { year: "1997", value: 7 },
-      { year: "1998", value: 9 },
-      { year: "1999", value: 11 },
-    ];
-
-    const config: any = {
-      title: {
-        text: "单折线图",
-      },
-      description: {
-        text: "一个简单的单折线图",
-      },
-      legend: {
-        flipPage: false,
-      },
-      label: {
-        visible: true,
-        style: {
-          fill: "#ffffff",
-          fontSize: 12,
+    const lineData = reactive({
+      data: [
+        { year: "1991", value: 3 },
+        { year: "1992", value: 4 },
+        { year: "1993", value: 3.5 },
+        { year: "1994", value: 5 },
+        { year: "1995", value: 4.9 },
+        { year: "1996", value: 6 },
+        { year: "1997", value: 7 },
+        { year: "1998", value: 9 },
+        { year: "1999", value: 11 },
+      ],
+      config: {
+        title: {
+          text: "单折线图",
         },
-      },
-      xAxis: {
+        description: {
+          text: "一个简单的单折线图",
+        },
+        legend: {
+          flipPage: false,
+        },
         label: {
+          visible: true,
           style: {
             fill: "#ffffff",
+            fontSize: 12,
           },
         },
-      },
-      yAxis: {
-        label: {
-          style: {
-            fill: "#ffffff",
+        xAxis: {
+          label: {
+            style: {
+              fill: "#ffffff",
+            },
           },
         },
+        yAxis: {
+          label: {
+            style: {
+              fill: "#ffffff",
+            },
+          },
+        },
+        smooth: true,
+        lineSize: 1,
+        forceFit: false,
+        width: 453,
+        height: 220,
+        xField: "year",
+        yField: "value",
+        color: "#ffffff",
       },
-      smooth: true,
-      lineSize: 1,
-      forceFit: false,
-      width: 453,
-      height: 220,
-      xField: "year",
-      yField: "value",
-      color: "#ffffff",
-    };
-
-    onMounted(() => {
-      const line = new Line("container", {
-        data,
-        ...config,
-      });
-      line.render();
-
-      let arr = line.options.data;
-      arr.push({
-        year: (+arr[arr.length - 1].year + 1).toString(),
-        value: 10 + +(Math.random() * 10).toFixed(0),
-      });
-      line.changeData(arr);
     });
 
     setInterval(() => {
       currentTime.value = getCurrentTime();
     }, 1000);
 
+    const addNewData = () => {
+      let arr = lineData.data;
+      arr.push({
+        year: (+arr[arr.length - 1].year + 1).toString(),
+        value: 10 + +(Math.random() * 10).toFixed(0),
+      });
+      lineData.data = arr;
+    };
+
     return {
       currentTime,
+      lineData,
+      addNewData,
     };
   },
 });
