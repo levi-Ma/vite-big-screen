@@ -37,7 +37,9 @@
           <div class="chart-title flex">
             <p class="title text-white">快递公司快件占比综合监测</p>
           </div>
-          <div class="pt-2"></div>
+          <div class="pt-2">
+            <n-button type="primary">add data</n-button>
+          </div>
           <div class="chart-line"></div>
         </div>
 
@@ -156,41 +158,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, reactive } from "vue";
 import { Line, Datum } from "@antv/g2plot";
+import { NButton } from "naive-ui";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
 
 export default defineComponent({
   name: "index",
-  components: {},
+  components: {
+    NButton,
+  },
   setup: () => {
     const currentTime = ref("");
-    const data = [
-      {
-        x: "2019-01",
-        y: 308,
-      },
-      {
-        x: "2019-02",
-        y: 371,
-      },
-      {
-        x: "2019-03",
-        y: 685,
-      },
-      {
-        x: "2019-04",
-        y: 257,
-      },
-      {
-        x: "2019-05",
-        y: 1500,
-      },
-      {
-        x: "2019-06",
-        y: 888,
-      },
+    const data: any = [
+      { year: "1991", value: 3 },
+      { year: "1992", value: 4 },
+      { year: "1993", value: 3.5 },
+      { year: "1994", value: 5 },
+      { year: "1995", value: 4.9 },
+      { year: "1996", value: 6 },
+      { year: "1997", value: 7 },
+      { year: "1998", value: 9 },
+      { year: "1999", value: 11 },
     ];
 
     const config: any = {
@@ -205,14 +195,32 @@ export default defineComponent({
       },
       label: {
         visible: true,
+        style: {
+          fill: "#ffffff",
+          fontSize: 12,
+        },
+      },
+      xAxis: {
+        label: {
+          style: {
+            fill: "#ffffff",
+          },
+        },
+      },
+      yAxis: {
+        label: {
+          style: {
+            fill: "#ffffff",
+          },
+        },
       },
       smooth: true,
       lineSize: 1,
       forceFit: false,
       width: 453,
       height: 220,
-      xField: "x",
-      yField: "y",
+      xField: "year",
+      yField: "value",
       color: "#ffffff",
     };
 
@@ -222,6 +230,13 @@ export default defineComponent({
         ...config,
       });
       line.render();
+
+      let arr = line.options.data;
+      arr.push({
+        year: (+arr[arr.length - 1].year + 1).toString(),
+        value: 10 + +(Math.random() * 10).toFixed(0),
+      });
+      line.changeData(arr);
     });
 
     setInterval(() => {
