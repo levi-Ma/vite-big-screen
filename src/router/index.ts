@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 // 组件
 import Index from "../page/index/index.vue";
 
-const routes: Array<any> = [
+const routes = [
   {
     path: "/",
     name: "index",

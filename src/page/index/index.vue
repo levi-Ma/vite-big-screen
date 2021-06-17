@@ -161,8 +161,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-
+import axios from "axios";
 import { NButton } from "naive-ui";
+import {
+  PERCENTAGE,
+  ARRIVALRATE,
+  TOTALEXPRESS,
+  USERANALYSIS,
+} from "@/services/api";
 import LineChart from "@/components/charts/line-chart.vue";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
@@ -241,6 +247,10 @@ export default defineComponent({
       });
       lineData.data = arr;
     };
+
+    axios.get(PERCENTAGE).then((res) => {
+      console.log(res.data);
+    });
 
     return {
       currentTime,
