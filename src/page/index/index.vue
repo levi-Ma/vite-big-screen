@@ -87,7 +87,9 @@
           <div class="chart-title flex">
             <p class="title text-white">驿站分布</p>
           </div>
-          <div class="map-view pt-2">地图</div>
+          <div class="map-view pt-2">
+            <div id="map-container" style="height: 390px; width: 100%"></div>
+          </div>
           <div class="chart-line"></div>
         </div>
         <!-- 总快件走势图 -->
@@ -109,7 +111,15 @@
           <div class="chart-title flex">
             <p class="title text-white">服务监控</p>
           </div>
-          <div class="video-view pt-5">监控</div>
+          <div class="video-view pt-5">
+            <video
+              ref="myRef"
+              autoplay
+              controls
+              width="100%"
+              class="video-box"
+            ></video>
+          </div>
           <div class="chart-line"></div>
         </div>
         <!-- 拼团订单统计 -->
@@ -163,9 +173,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, nextTick, onMounted } from "vue";
 
 import axios from "axios";
+import AMapLoader from "@amap/amap-jsapi-loader";
+// import flvjs from "flv.js";
 import { NButton } from "naive-ui";
 import { AreaChart, BarChart, ColumnChart, PieChart } from "@opd/g2plot-vue";
 
@@ -296,6 +308,7 @@ export default defineComponent({
         },
       },
     };
+    const myRef: any = ref(null);
 
     axios.get(PERCENTAGE).then((res) => {
       pieData.data = res.data.data;
@@ -317,6 +330,7 @@ export default defineComponent({
       currentTime.value = getCurrentTime();
     }, 1000);
 
+    // 更新数据的方法
     // const handleBtnClick = () => {
     //   const lastItem = testData.data[testData.data.length - 1];
     //   testData.data = [
@@ -328,7 +342,70 @@ export default defineComponent({
     //   ];
     // };
 
+    // 高德地图
+    AMapLoader.load({
+      key: "1303d75fa249a1f3b3899c7e62b715be", // 申请好的Web端开发者Key，首次调用 load 时必填
+      version: "1.4.15", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+      plugins: ["AMap.ToolBar"], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+      AMapUI: {
+        // 是否加载 AMapUI，缺省不加载
+        version: "1.1", // AMapUI 缺省 1.1
+        plugins: [], // 需要加载的 AMapUI ui插件
+      },
+      Loca: {
+        // 是否加载 Loca， 缺省不加载
+        version: "1.3.2", // Loca 版本，缺省 1.3.2
+      },
+    })
+      .then((AMap) => {
+        const map = new AMap.Map("map-container", {
+          zoom: 12, //级别
+          center: [116.397428, 39.90923], //中心点坐标
+          viewMode: "3D", //使用3D视图
+          resizeEnable: true, //是否监控地图容器尺寸变化
+          mapStyle: "amap://styles/darkblue",
+        });
+        let marker1 = new AMap.Marker({
+          position: new AMap.LngLat(116.397948, 39.900262),
+          icon: "https://mqyz.fengzhishike.cn/attachment/images/2020/10/17/image_1602899689_z8i9Iz89.png", // 添加 Icon 图标 URL
+        });
+        let marker2 = new AMap.Marker({
+          position: new AMap.LngLat(116.402841, 39.90148),
+          icon: "https://mqyz.fengzhishike.cn/attachment/images/2020/10/17/image_1602899689_z8i9Iz89.png", // 添加 Icon 图标 URL
+        });
+        const markers = [marker1, marker2];
+        map.add(markers);
+
+        map.setStatus({
+          dragEnable: true,
+          keyboardEnable: true,
+          doubleClickZoom: true,
+          zoomEnable: true,
+          rotateEnable: true,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // flv.js
+    nextTick(() => {
+      console.dir(myRef.value);
+      // console.log(flvjs);
+
+      // if (flvjs.isSupported()) {
+      //   const flvPlay = flvjs.createPlayer({
+      //     type: "flv",
+      //     url: "https://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv", //你的url地址
+      //   });
+      //   flvPlay.attachMediaElement(myRef.value);
+      //   flvPlay.load();
+      //   flvPlay.play();
+      // }
+    });
+
     return {
+      myRef,
       currentTime,
       pieData,
       columnData,
@@ -343,9 +420,9 @@ export default defineComponent({
 .index-container {
   width: 100%;
   height: 100vh;
-  min-height: 1080px;
+  min-height: 100vh;
   background-image: url("@/assets/img/bg.png");
-  background-size: 100% 1080px;
+  background-size: 100% 100vh;
   @apply px-5 bg-no-repeat bg-center;
 }
 
