@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch } from "vue";
+import { defineComponent, onUpdated, watch } from "vue";
 import { Bar } from "@antv/g2plot";
 // 基础条形图
 
@@ -24,21 +24,23 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const LineChart: any = {};
-    const data: any = props.data;
-    const config: any = props.config;
-    const baseId: string = props.baseId;
+    const barChart: any = {};
 
-    watch(props, (nweProps, oldProps) => {
-      LineChart.bar.changeData(nweProps.data);
-    });
+    onUpdated(() => {
+      console.log("onUpdated");
+      const data: any[] = props.data;
+      const config: any = props.config;
+      const baseId: string = props.baseId;
 
-    onMounted(() => {
-      LineChart.bar = new Bar(baseId, {
+      barChart.column = new Bar(baseId, {
         data,
         ...config,
       });
-      LineChart.bar.render();
+      barChart.column.render();
+    });
+
+    watch(props, (nweProps, oldProps) => {
+      // barChart.bar.changeData(nweProps.data);
     });
 
     return {};

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, onMounted, watch } from "vue";
+import { defineComponent, onBeforeMount, onBeforeUpdate, onMounted, onUpdated, watch } from "vue";
 import { Pie } from "@antv/g2plot";
 // 基础饼图
 
@@ -30,26 +30,38 @@ export default defineComponent({
     console.log("created");
   },
   setup: (props) => {
-    const LineChart: any = {};
-    const data: any = props.data;
-    const config: any = props.config;
-    const baseId: string = props.baseId;
-
-    watch(props, (newProps, oldProps) => {
-      LineChart.pie.changeData(newProps.data);
-    });
-
+    console.log('setup');
+    
+    const pieChart: any = {};
+    
     onBeforeMount(() => {
       console.log("onBeforeMount");
     });
 
     onMounted(() => {
       console.log("onMounted");
-      LineChart.pie = new Pie(baseId, {
+    });
+
+    onBeforeUpdate(() => {
+      console.log("onBeforeUpdate");
+    });
+
+    onUpdated(() => {
+      console.log('onUpdated');
+      console.log(props);
+      const data: any[] = props.data;
+      const config: any = props.config;
+      const baseId: string = props.baseId;
+
+      pieChart.pie = new Pie(baseId, {
         data,
         ...config,
       });
-      LineChart.pie.render();
+      pieChart.pie.render();
+    });
+
+    watch(props, (newProps, oldProps) => {
+      // pieChart.pie.changeData(newProps.data);
     });
 
     return {};

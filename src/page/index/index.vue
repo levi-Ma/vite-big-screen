@@ -38,11 +38,6 @@
             <p class="title text-white">快递公司快件占比综合监测</p>
           </div>
           <div class="pt-2">
-            <!-- <LineChart
-              baseId="map1"
-              :data="lineData.data"
-              :config="lineData.config"
-            /> -->
             <PieChart
               baseId="map1"
               :data="pieData.data"
@@ -57,7 +52,13 @@
           <div class="chart-title flex">
             <p class="title text-white">驿站到达率问题率比例</p>
           </div>
-          <div class="pt-3"></div>
+          <div class="pt-3">
+            <ColumnChart
+              baseId="map2"
+              :data="columnData.data"
+              :config="columnData.config"
+            />
+          </div>
           <div class="chart-line"></div>
         </div>
       </div>
@@ -101,7 +102,13 @@
           <div class="chart-title flex">
             <p class="title text-white">总快件走势图</p>
           </div>
-          <div class="pt-2">图表</div>
+          <div class="pt-2">
+            <AreaChart
+              baseId="map3"
+              :data="lineData.data"
+              :config="lineData.config"
+            />
+          </div>
           <div class="chart-line"></div>
         </div>
       </div>
@@ -156,7 +163,13 @@
           <div class="chart-title flex">
             <p class="title text-white">用户分析</p>
           </div>
-          <div class="pt-2">图表</div>
+          <div class="pt-2">
+            <BarChart
+              baseId="map4"
+              :data="barData.data"
+              :config="barData.config"
+            />
+          </div>
           <div class="chart-line"></div>
         </div>
       </div>
@@ -165,7 +178,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref } from "vue";
 import axios from "axios";
 import { NButton } from "naive-ui";
 import {
@@ -192,70 +205,11 @@ export default defineComponent({
   },
   setup: () => {
     const currentTime = ref("");
-    // const lineData = reactive({
-    //   data: [
-    //     { year: "1991", value: 3 },
-    //     { year: "1992", value: 4 },
-    //     { year: "1993", value: 3.5 },
-    //     { year: "1994", value: 5 },
-    //     { year: "1995", value: 4.9 },
-    //     { year: "1996", value: 6 },
-    //     { year: "1997", value: 7 },
-    //     { year: "1998", value: 9 },
-    //     { year: "1999", value: 11 },
-    //   ],
-    //   config: {
-    //     title: {
-    //       text: "单折线图",
-    //     },
-    //     description: {
-    //       text: "一个简单的单折线图",
-    //     },
-    //     legend: {
-    //       flipPage: false,
-    //     },
-    //     label: {
-    //       visible: true,
-    //       style: {
-    //         fill: "#ffffff",
-    //         fontSize: 12,
-    //       },
-    //     },
-    //     xAxis: {
-    //       label: {
-    //         style: {
-    //           fill: "#ffffff",
-    //         },
-    //       },
-    //     },
-    //     yAxis: {
-    //       label: {
-    //         style: {
-    //           fill: "#ffffff",
-    //         },
-    //       },
-    //     },
-    //     smooth: true,
-    //     lineSize: 1,
-    //     forceFit: false,
-    //     width: 453,
-    //     height: 220,
-    //     xField: "year",
-    //     yField: "value",
-    //     color: "#ffffff",
-    //   },
-    // });
-    // const addNewData = () => {
-    //   let arr = lineData.data;
-    //   arr.push({
-    //     year: (+arr[arr.length - 1].year + 1).toString(),
-    //     value: 10 + +(Math.random() * 10).toFixed(0),
-    //   });
-    //   lineData.data = arr;
-    // };
+
     setInterval(() => {
       currentTime.value = getCurrentTime();
     }, 1000);
+
     const pieData: any = {
       config: {
         width: 300,
@@ -272,6 +226,35 @@ export default defineComponent({
             fontSize: 12,
           },
         },
+        legend: false,
+        interactions: [
+          { type: "element-selected" },
+          { type: "element-active" },
+        ],
+      },
+    };
+    const columnData: any = {
+      config: {
+        height: 230,
+        xField: "title",
+        yField: "value",
+        seriesField: "type",
+        isGroup: "true",
+        label: {
+          layout: [
+            { type: "interval-adjust-position" },
+            { type: "interval-hide-overlap" },
+            { type: "adjust-color" },
+          ],
+        },
+        legend: {
+          position: "bottom",
+          itemName: {
+            style: {
+              fill: "#fff",
+            },
+          },
+        },
         xAxis: {
           label: {
             style: {
@@ -286,29 +269,73 @@ export default defineComponent({
             },
           },
         },
-        interactions: [
-          { type: "element-selected" },
-          { type: "element-active" },
-        ],
       },
     };
+    const lineData: any = {
+      config: {
+        height: 220,
+        xField: "type",
+        yField: "sales",
+        smooth: true,
+        xAxis: {
+          label: {
+            style: {
+              fill: "#ffffff",
+            },
+          },
+        },
+        yAxis: {
+          label: {
+            style: {
+              fill: "#ffffff",
+            },
+          },
+        },
+      },
+    };
+    const barData: any = {
+      config: {
+        height: 120,
+        xField: "数量",
+        yField: "性别",
+        seriesField: "性别",
+        legend: false,
+        xAxis: {
+          label: {
+            style: {
+              fill: "#ffffff",
+            },
+          },
+        },
+        yAxis: {
+          label: {
+            style: {
+              fill: "#ffffff",
+            },
+          },
+        },
+      },
+    };
+
     axios.get(PERCENTAGE).then((res) => {
-      // console.log(res.data);
       pieData.data = res.data.data;
     });
     axios.get(ARRIVALRATE).then((res) => {
-      // console.log(res.data);
+      columnData.data = res.data.data;
     });
     axios.get(TOTALEXPRESS).then((res) => {
-      // console.log(res.data);
+      lineData.data = res.data.data;
     });
     axios.get(USERANALYSIS).then((res) => {
-      // console.log(res.data);
+      barData.data = res.data.data;
     });
 
     return {
       currentTime,
       pieData,
+      columnData,
+      lineData,
+      barData,
     };
   },
 });

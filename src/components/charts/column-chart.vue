@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch } from "vue";
+import { defineComponent, onUpdated, watch } from "vue";
 import { Column } from "@antv/g2plot";
 // 分组柱状图
 
@@ -24,21 +24,23 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const LineChart: any = {};
-    const data: any = props.data;
-    const config: any = props.config;
-    const baseId: string = props.baseId;
+    const columnChart: any = {};
 
-    watch(props, (nweProps, oldProps) => {
-      LineChart.column.changeData(nweProps.data);
-    });
+    onUpdated(() => {
+      console.log('onUpdated');
+      const data: any[] = props.data;
+      const config: any = props.config;
+      const baseId: string = props.baseId;
 
-    onMounted(() => {
-      LineChart.column = new Column(baseId, {
+      columnChart.column = new Column(baseId, {
         data,
         ...config,
       });
-      LineChart.column.render();
+      columnChart.column.render();
+    });
+
+    watch(props, (nweProps, oldProps) => {
+      // columnChart.column.changeData(nweProps.data);
     });
 
     return {};

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch } from "vue";
+import { defineComponent, onUpdated, watch } from "vue";
 import { Area } from "@antv/g2plot";
 // 基础面积图
 
@@ -24,21 +24,22 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const LineChart: any = {};
-    const data: any = props.data;
-    const config: any = props.config;
-    const baseId: string = props.baseId;
+    const areaChart: any = {};
 
-    watch(props, (nweProps, oldProps) => {
-      LineChart.area.changeData(nweProps.data);
-    });
+    onUpdated(() => {
+      const data: any = props.data;
+      const config: any = props.config;
+      const baseId: string = props.baseId;
 
-    onMounted(() => {
-      LineChart.area = new Area(baseId, {
+      areaChart.area = new Area(baseId, {
         data,
         ...config,
       });
-      LineChart.area.render();
+      areaChart.area.render();
+    });
+
+    watch(props, (nweProps, oldProps) => {
+      // areaChart.area.changeData(nweProps.data);
     });
 
     return {};
