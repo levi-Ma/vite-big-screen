@@ -1,14 +1,14 @@
 <template>
-  <div :id="baseId" type="line"></div>
+  <div :id="baseId" type="area"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
-import { Line } from "@antv/g2plot";
-// 基础折线图
+import { Area } from "@antv/g2plot";
+// 基础面积图
 
 export default defineComponent({
-  name: "line-chart",
+  name: "area-chart",
   props: {
     baseId: {
       type: String,
@@ -30,15 +30,15 @@ export default defineComponent({
     const baseId: string = props.baseId;
 
     watch(props, (nweProps, oldProps) => {
-      LineChart.line.changeData(nweProps.data);
+      LineChart.area.changeData(nweProps.data);
     });
 
     onMounted(() => {
-      LineChart.line = new Line(baseId, {
+      LineChart.area = new Area(baseId, {
         data,
         ...config,
       });
-      LineChart.line.render();
+      LineChart.area.render();
     });
 
     return {};

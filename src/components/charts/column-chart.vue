@@ -1,14 +1,14 @@
 <template>
-  <div :id="baseId" type="line"></div>
+  <div :id="baseId" type="column"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
-import { Line } from "@antv/g2plot";
-// 基础折线图
+import { Column } from "@antv/g2plot";
+// 分组柱状图
 
 export default defineComponent({
-  name: "line-chart",
+  name: "column-chart",
   props: {
     baseId: {
       type: String,
@@ -30,15 +30,15 @@ export default defineComponent({
     const baseId: string = props.baseId;
 
     watch(props, (nweProps, oldProps) => {
-      LineChart.line.changeData(nweProps.data);
+      LineChart.column.changeData(nweProps.data);
     });
 
     onMounted(() => {
-      LineChart.line = new Line(baseId, {
+      LineChart.column = new Column(baseId, {
         data,
         ...config,
       });
-      LineChart.line.render();
+      LineChart.column.render();
     });
 
     return {};

@@ -1,14 +1,14 @@
 <template>
-  <div :id="baseId" type="line"></div>
+  <div :id="baseId" type="pie"></div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch } from "vue";
-import { Line } from "@antv/g2plot";
-// 基础折线图
+import { defineComponent, onBeforeMount, onMounted, watch } from "vue";
+import { Pie } from "@antv/g2plot";
+// 基础饼图
 
 export default defineComponent({
-  name: "line-chart",
+  name: "pie-chart",
   props: {
     baseId: {
       type: String,
@@ -23,22 +23,33 @@ export default defineComponent({
       required: true,
     },
   },
+  beforeCreate() {
+    console.log("beforeCreate");
+  },
+  created() {
+    console.log("created");
+  },
   setup: (props) => {
     const LineChart: any = {};
     const data: any = props.data;
     const config: any = props.config;
     const baseId: string = props.baseId;
 
-    watch(props, (nweProps, oldProps) => {
-      LineChart.line.changeData(nweProps.data);
+    watch(props, (newProps, oldProps) => {
+      LineChart.pie.changeData(newProps.data);
+    });
+
+    onBeforeMount(() => {
+      console.log("onBeforeMount");
     });
 
     onMounted(() => {
-      LineChart.line = new Line(baseId, {
+      console.log("onMounted");
+      LineChart.pie = new Pie(baseId, {
         data,
         ...config,
       });
-      LineChart.line.render();
+      LineChart.pie.render();
     });
 
     return {};

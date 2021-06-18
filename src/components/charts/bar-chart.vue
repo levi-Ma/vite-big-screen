@@ -1,14 +1,14 @@
 <template>
-  <div :id="baseId" type="line"></div>
+  <div :id="baseId" type="bar"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
-import { Line } from "@antv/g2plot";
-// 基础折线图
+import { Bar } from "@antv/g2plot";
+// 基础条形图
 
 export default defineComponent({
-  name: "line-chart",
+  name: "bar-chart",
   props: {
     baseId: {
       type: String,
@@ -30,15 +30,15 @@ export default defineComponent({
     const baseId: string = props.baseId;
 
     watch(props, (nweProps, oldProps) => {
-      LineChart.line.changeData(nweProps.data);
+      LineChart.bar.changeData(nweProps.data);
     });
 
     onMounted(() => {
-      LineChart.line = new Line(baseId, {
+      LineChart.bar = new Bar(baseId, {
         data,
         ...config,
       });
-      LineChart.line.render();
+      LineChart.bar.render();
     });
 
     return {};
