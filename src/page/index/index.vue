@@ -38,11 +38,7 @@
             <p class="title text-white">快递公司快件占比综合监测</p>
           </div>
           <div class="pt-2">
-            <PieChart
-              baseId="map1"
-              :data="pieData.data"
-              :config="pieData.config"
-            />
+            <PieChart :data="pieData.data" v-bind="pieData.config" />
           </div>
           <div class="chart-line"></div>
         </div>
@@ -53,11 +49,8 @@
             <p class="title text-white">驿站到达率问题率比例</p>
           </div>
           <div class="pt-3">
-            <ColumnChart
-              baseId="map2"
-              :data="columnData.data"
-              :config="columnData.config"
-            />
+            <!-- <n-button type="primary" @click="handleBtnClick">添加数据</n-button> -->
+            <ColumnChart :data="columnData.data" v-bind="columnData.config" />
           </div>
           <div class="chart-line"></div>
         </div>
@@ -103,11 +96,7 @@
             <p class="title text-white">总快件走势图</p>
           </div>
           <div class="pt-2">
-            <AreaChart
-              baseId="map3"
-              :data="lineData.data"
-              :config="lineData.config"
-            />
+            <AreaChart :data="lineData.data" v-bind="lineData.config" />
           </div>
           <div class="chart-line"></div>
         </div>
@@ -164,11 +153,7 @@
             <p class="title text-white">用户分析</p>
           </div>
           <div class="pt-2">
-            <BarChart
-              baseId="map4"
-              :data="barData.data"
-              :config="barData.config"
-            />
+            <BarChart :data="barData.data" v-bind="barData.config" />
           </div>
           <div class="chart-line"></div>
         </div>
@@ -182,6 +167,7 @@ import { defineComponent, ref } from "vue";
 
 import axios from "axios";
 import { NButton } from "naive-ui";
+import { AreaChart, BarChart, ColumnChart, PieChart } from "@opd/g2plot-vue";
 
 import {
   PERCENTAGE,
@@ -189,7 +175,6 @@ import {
   TOTALEXPRESS,
   USERANALYSIS,
 } from "@/services/api";
-import { AreaChart, BarChart, ColumnChart, PieChart } from "@/common/chart";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
 
@@ -266,6 +251,7 @@ export default defineComponent({
       },
     };
     const lineData: any = {
+      data: null,
       config: {
         height: 220,
         xField: "type",
@@ -330,6 +316,17 @@ export default defineComponent({
     setInterval(() => {
       currentTime.value = getCurrentTime();
     }, 1000);
+
+    // const handleBtnClick = () => {
+    //   const lastItem = testData.data[testData.data.length - 1];
+    //   testData.data = [
+    //     ...testData.data,
+    //     {
+    //       year: (+lastItem.year + 1).toString(),
+    //       value: Math.ceil(Math.random() * 100),
+    //     },
+    //   ];
+    // };
 
     return {
       currentTime,
