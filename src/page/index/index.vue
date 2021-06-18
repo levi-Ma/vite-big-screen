@@ -179,18 +179,17 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+
 import axios from "axios";
 import { NButton } from "naive-ui";
+
 import {
   PERCENTAGE,
   ARRIVALRATE,
   TOTALEXPRESS,
   USERANALYSIS,
 } from "@/services/api";
-import AreaChart from "@/components/charts/area-chart.vue";
-import BarChart from "@/components/charts/bar-chart.vue";
-import ColumnChart from "@/components/charts/column-chart.vue";
-import PieChart from "@/components/charts/pie-chart.vue";
+import { AreaChart, BarChart, ColumnChart, PieChart } from "@/common/chart";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
 
@@ -205,11 +204,6 @@ export default defineComponent({
   },
   setup: () => {
     const currentTime = ref("");
-
-    setInterval(() => {
-      currentTime.value = getCurrentTime();
-    }, 1000);
-
     const pieData: any = {
       config: {
         width: 300,
@@ -275,7 +269,7 @@ export default defineComponent({
       config: {
         height: 220,
         xField: "type",
-        yField: "sales",
+        yField: "数量",
         smooth: true,
         xAxis: {
           label: {
@@ -296,9 +290,9 @@ export default defineComponent({
     const barData: any = {
       config: {
         height: 120,
-        xField: "数量",
-        yField: "性别",
-        seriesField: "性别",
+        xField: "value",
+        yField: "title",
+        seriesField: "title",
         legend: false,
         xAxis: {
           label: {
@@ -320,15 +314,22 @@ export default defineComponent({
     axios.get(PERCENTAGE).then((res) => {
       pieData.data = res.data.data;
     });
+
     axios.get(ARRIVALRATE).then((res) => {
       columnData.data = res.data.data;
     });
+
     axios.get(TOTALEXPRESS).then((res) => {
       lineData.data = res.data.data;
     });
+
     axios.get(USERANALYSIS).then((res) => {
       barData.data = res.data.data;
     });
+
+    setInterval(() => {
+      currentTime.value = getCurrentTime();
+    }, 1000);
 
     return {
       currentTime,

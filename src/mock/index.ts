@@ -45,27 +45,27 @@ Mock.mock(TOTALEXPRESS, {
   data: [
     {
       type: "2020 Q1",
-      sales: "@integer(0, 100000)",
+      数量: "@integer(0, 100000)",
     },
     {
       type: "2020 Q2",
-      sales: "@integer(0, 100000)",
+      数量: "@integer(0, 100000)",
     },
     {
       type: "2020 Q3",
-      sales: "@integer(0, 100000)",
+      数量: "@integer(0, 100000)",
     },
     {
       type: "2020 Q4",
-      sales: "@integer(0, 100000)",
+      数量: "@integer(0, 100000)",
     },
     {
       type: "2021 Q1",
-      sales: "@integer(0, 100000)",
+      数量: "@integer(0, 100000)",
     },
     {
       type: "2021 Q2",
-      sales: "@integer(0, 100000)",
+      数量: "@integer(0, 100000)",
     },
   ],
 });
@@ -73,16 +73,16 @@ Mock.mock(TOTALEXPRESS, {
 Mock.mock(USERANALYSIS, {
   data: [
     {
-      性别: "未知",
-      数量: "@integer(0, 100000)",
+      title: "未知",
+      value: "@integer(0, 100000)",
     },
     {
-      性别: "男性",
-      数量: "@integer(0, 100000)",
+      title: "男性",
+      value: "@integer(0, 100000)",
     },
     {
-      性别: "女性",
-      数量: "@integer(0, 100000)",
+      title: "女性",
+      value: "@integer(0, 100000)",
     },
   ],
 });
