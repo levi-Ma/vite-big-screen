@@ -10,10 +10,11 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@antv/g2plot": "^2.3.23",
     "@babel/runtime": "^7.13.0",
+    "@nplayer/vue": "^1.0.9",
     "@opd/g2plot-vue": "^3.3.0",
     "axios": "^0.21.1",
     "better-mock": "^0.3.1",
-    "flv.js": "^1.5.0",
+    "nplayer": "^1.0.9",
     "vue": "^3.0.5",
     "vue-router": "4",
     "vuex": "^4.0.1"

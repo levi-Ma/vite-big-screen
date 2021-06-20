@@ -533,6 +533,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@nplayer/vue@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@nplayer/vue/-/vue-1.0.9.tgz#9ac8e9b8c5aa8026af9645dccabaa97c79c7e10c"
+  integrity sha512-Vu2C+w1Q5yY7z32RRsN9a9ffqIp8cWnRy92dc9rHjm84kRb2/QgkperUIEBcl1cQ6cLUeqiURmmZrQMY1gk8Jw==
+
 "@opd/g2plot-vue@^3.3.0":
   version "3.3.0"
   resolved "https://registry.nlark.com/@opd/g2plot-vue/download/@opd/g2plot-vue-3.3.0.tgz#1abb575d65607601daa0e0af87ac51654416e46a"
@@ -1196,11 +1201,6 @@ emojis-list@^3.0.0:
   resolved "https://registry.nlark.com/emojis-list/download/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha1-VXBmIEatKeLpFucariYKvf9Pang=
 
-es6-promise@^4.2.5:
-  version "4.2.8"
-  resolved "https://registry.npm.taobao.org/es6-promise/download/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
-  integrity sha1-TrIVlMlyvEBVPSduUQU5FD21Pgo=
-
 esbuild@^0.12.5:
   version "0.12.8"
   resolved "https://registry.nlark.com/esbuild/download/esbuild-0.12.8.tgz?cache=0&sync_timestamp=1623226419292&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.8.tgz#ac90da77cb3bfbf49ab815200bcef7ffe1a3348f"
@@ -1271,14 +1271,6 @@ fill-range@^7.0.1:
   integrity sha1-GRmmp8df44ssfHflGYU12prN2kA=
   dependencies:
     to-regex-range "^5.0.1"
-
-flv.js@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.npm.taobao.org/flv.js/download/flv.js-1.5.0.tgz#fa59bed4391d70435cfa8740ac40ec0070ef98ae"
-  integrity sha1-+lm+1DkdcENc+odArEDsAHDvmK4=
-  dependencies:
-    es6-promise "^4.2.5"
-    webworkify "^1.5.0"
 
 follow-redirects@^1.10.0:
   version "1.14.1"
@@ -1738,6 +1730,11 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.npm.taobao.org/normalize-range/download/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
+
+nplayer@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/nplayer/-/nplayer-1.0.9.tgz#635d12d5fbf7d95cb08d8a071d99e70d563fa9b8"
+  integrity sha512-RYUsrl9jCpMOpqrk+X9Z0aBFTpgzGooD98ojbXgePGY4EfAl30kqDK+H84QKeiGjjspmyR78Ke+kVpiDzNnQTg==
 
 num2fraction@^1.2.2:
   version "1.2.2"
@@ -2341,11 +2338,6 @@ vuex@^4.0.1:
   integrity sha1-6DxUHW8xFzlp76uyxdHEZbaCiH4=
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.11"
-
-webworkify@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.npm.taobao.org/webworkify/download/webworkify-1.5.0.tgz#734ad87a774de6ebdd546e1d3e027da5b8f4a42c"
-  integrity sha1-c0rYendN5uvdVG4dPgJ9pbj0pCw=
 
 wrappy@1:
   version "1.0.2"

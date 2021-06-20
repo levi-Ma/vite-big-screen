@@ -112,13 +112,7 @@
             <p class="title text-white">服务监控</p>
           </div>
           <div class="video-view pt-5">
-            <video
-              ref="myRef"
-              autoplay
-              controls
-              width="100%"
-              class="video-box"
-            ></video>
+            <n-player />
           </div>
           <div class="chart-line"></div>
         </div>
@@ -173,11 +167,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, nextTick, onMounted } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 import axios from "axios";
 import AMapLoader from "@amap/amap-jsapi-loader";
-// import flvjs from "flv.js";
 import { NButton } from "naive-ui";
 import { AreaChart, BarChart, ColumnChart, PieChart } from "@opd/g2plot-vue";
 
@@ -189,6 +182,7 @@ import {
 } from "@/services/api";
 // 当前时间
 import getCurrentTime from "@/utils/getCurrentTime";
+import nPlayer from "@/components/n-player/n-player.vue";
 
 export default defineComponent({
   name: "index",
@@ -198,6 +192,7 @@ export default defineComponent({
     ColumnChart,
     PieChart,
     NButton,
+    nPlayer,
   },
   setup: () => {
     const currentTime = ref("");
@@ -308,7 +303,6 @@ export default defineComponent({
         },
       },
     };
-    const myRef: any = ref(null);
 
     axios.get(PERCENTAGE).then((res) => {
       pieData.data = res.data.data;
@@ -388,24 +382,7 @@ export default defineComponent({
         console.log(e);
       });
 
-    // flv.js
-    nextTick(() => {
-      console.dir(myRef.value);
-      // console.log(flvjs);
-
-      // if (flvjs.isSupported()) {
-      //   const flvPlay = flvjs.createPlayer({
-      //     type: "flv",
-      //     url: "https://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv", //你的url地址
-      //   });
-      //   flvPlay.attachMediaElement(myRef.value);
-      //   flvPlay.load();
-      //   flvPlay.play();
-      // }
-    });
-
     return {
-      myRef,
       currentTime,
       pieData,
       columnData,
@@ -621,5 +598,9 @@ export default defineComponent({
   .number {
     font-size: 14px;
   }
+}
+
+.video-view {
+  height: 230px;
 }
 </style>
