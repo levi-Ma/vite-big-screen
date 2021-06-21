@@ -1201,6 +1201,11 @@ emojis-list@^3.0.0:
   resolved "https://registry.nlark.com/emojis-list/download/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha1-VXBmIEatKeLpFucariYKvf9Pang=
 
+es6-promise@^4.2.5:
+  version "4.2.8"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
+  integrity sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==
+
 esbuild@^0.12.5:
   version "0.12.8"
   resolved "https://registry.nlark.com/esbuild/download/esbuild-0.12.8.tgz?cache=0&sync_timestamp=1623226419292&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.8.tgz#ac90da77cb3bfbf49ab815200bcef7ffe1a3348f"
@@ -1220,6 +1225,11 @@ estree-walker@^2.0.1:
   version "2.0.2"
   resolved "https://registry.npm.taobao.org/estree-walker/download/estree-walker-2.0.2.tgz#52f010178c2a4c117a7757cfe942adb7d2da4cac"
   integrity sha1-UvAQF4wqTBF6d1fP6UKtt9LaTKw=
+
+events@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
 evtd@^0.2.2:
   version "0.2.2"
@@ -1271,6 +1281,14 @@ fill-range@^7.0.1:
   integrity sha1-GRmmp8df44ssfHflGYU12prN2kA=
   dependencies:
     to-regex-range "^5.0.1"
+
+flv.js@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/flv.js/-/flv.js-1.5.0.tgz#fa59bed4391d70435cfa8740ac40ec0070ef98ae"
+  integrity sha512-7tFwccqkFXpA7RIED0KvuNny2qVnpuGc5nTGsRpzrCT+qtwIaZyciK5UgyvgtlAMYaPFzYS0wdI92JiSBKOyXw==
+  dependencies:
+    es6-promise "^4.2.5"
+    webworkify "^1.5.0"
 
 follow-redirects@^1.10.0:
   version "1.14.1"
@@ -1730,11 +1748,6 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.npm.taobao.org/normalize-range/download/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
-
-nplayer@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/nplayer/-/nplayer-1.0.9.tgz#635d12d5fbf7d95cb08d8a071d99e70d563fa9b8"
-  integrity sha512-RYUsrl9jCpMOpqrk+X9Z0aBFTpgzGooD98ojbXgePGY4EfAl30kqDK+H84QKeiGjjspmyR78Ke+kVpiDzNnQTg==
 
 num2fraction@^1.2.2:
   version "1.2.2"
@@ -2338,6 +2351,11 @@ vuex@^4.0.1:
   integrity sha1-6DxUHW8xFzlp76uyxdHEZbaCiH4=
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.11"
+
+webworkify@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/webworkify/-/webworkify-1.5.0.tgz#734ad87a774de6ebdd546e1d3e027da5b8f4a42c"
+  integrity sha512-AMcUeyXAhbACL8S2hqqdqOLqvJ8ylmIbNwUIqQujRSouf4+eUFaXbG6F1Rbu+srlJMmxQWsiU7mOJi0nMBfM1g==
 
 wrappy@1:
   version "1.0.2"

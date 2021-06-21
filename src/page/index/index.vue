@@ -112,7 +112,15 @@
             <p class="title text-white">服务监控</p>
           </div>
           <div class="video-view pt-5">
-            <n-player />
+            <!-- <n-player /> -->
+            <n-button @click="playVideo" type="primary">播放视频</n-button>
+            <video
+              v-show="isLiveVideo"
+              controls
+              width="100%"
+              class="video-box"
+              ref="myRef"
+            ></video>
           </div>
           <div class="chart-line"></div>
         </div>
@@ -173,6 +181,7 @@ import axios from "axios";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { NButton } from "naive-ui";
 import { AreaChart, BarChart, ColumnChart, PieChart } from "@opd/g2plot-vue";
+import flvjs from "flv.js";
 
 import {
   PERCENTAGE,
@@ -303,6 +312,9 @@ export default defineComponent({
         },
       },
     };
+    let myRef = ref(null);
+    let flvPlay: any = null;
+    let isLiveVideo = ref(false);
 
     axios.get(PERCENTAGE).then((res) => {
       pieData.data = res.data.data;
@@ -382,18 +394,47 @@ export default defineComponent({
         console.log(e);
       });
 
+    onMounted(() => {});
+
+    const playVideo = () => {
+      isLiveVideo.value = true;
+      if (flvjs.isSupported()) {
+        flvPlay = flvjs.createPlayer({
+          type: "flv",
+          url: "https://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv", //你的url地址
+        });
+        flvPlay.attachMediaElement(myRef.value);
+        flvPlay.load();
+        flvPlay.play();
+      }
+    };
+
     return {
       currentTime,
       pieData,
       columnData,
       lineData,
       barData,
+      myRef,
+      flvPlay,
+      isLiveVideo,
+      playVideo,
     };
   },
 });
 </script>
 
 <style lang="scss">
+html {
+  min-height: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+}
 .index-container {
   width: 100%;
   height: 100vh;
@@ -602,5 +643,9 @@ export default defineComponent({
 
 .video-view {
   height: 230px;
+  .video-box {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

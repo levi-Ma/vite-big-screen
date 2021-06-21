@@ -13,3 +13,4 @@
 - [Better-Mock](http://github.com/lavyun/better-mock/)
 - [Axios](https://github.com/axios/axios)
 - [Naive UI](https://github.com/TuSimple/naive-ui/)
+- [nplayer](https://github.com/woopen/nplayer)
