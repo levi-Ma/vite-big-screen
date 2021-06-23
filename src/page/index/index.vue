@@ -371,13 +371,20 @@ export default defineComponent({
           resizeEnable: true, //是否监控地图容器尺寸变化
           mapStyle: "amap://styles/darkblue",
         });
+        const icon = new AMap.Icon({
+          image: "https://s2.ax1x.com/2020/03/10/8CvKmt.png",
+          imageSize: {
+            width: 20,
+            height: 20,
+          },
+        });
         let marker1 = new AMap.Marker({
           position: new AMap.LngLat(116.397948, 39.900262),
-          icon: "https://mqyz.fengzhishike.cn/attachment/images/2020/10/17/image_1602899689_z8i9Iz89.png", // 添加 Icon 图标 URL
+          icon,
         });
         let marker2 = new AMap.Marker({
           position: new AMap.LngLat(116.402841, 39.90148),
-          icon: "https://mqyz.fengzhishike.cn/attachment/images/2020/10/17/image_1602899689_z8i9Iz89.png", // 添加 Icon 图标 URL
+          icon,
         });
         const markers = [marker1, marker2];
         map.add(markers);
