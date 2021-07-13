@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,7 +10,6 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@antv/g2plot": "^2.3.23",
     "@babel/runtime": "^7.13.0",
-    "@nplayer/vue": "^1.0.9",
     "@opd/g2plot-vue": "^3.3.0",
     "axios": "^0.21.1",
     "better-mock": "^0.3.1",
